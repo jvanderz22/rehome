@@ -11,10 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150627184052) do
+ActiveRecord::Schema.define(version: 20150627205503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adoption_applications", force: :cascade do |t|
+    t.string   "charity"
+    t.string   "pet_name"
+    t.money    "rehoming_fee", scale: 2
+    t.string   "status"
+    t.integer  "owner_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "adoption_applications_users", id: false, force: :cascade do |t|
+    t.integer "adoption_application_id", null: false
+    t.integer "user_id",                 null: false
+  end
+
+  create_table "background_checks", force: :cascade do |t|
+    t.integer  "applicant_id"
+    t.text     "text"
+    t.text     "notes"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "paypal_infos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "paypal_infos", ["user_id"], name: "index_paypal_infos_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -29,9 +61,16 @@ ActiveRecord::Schema.define(version: 20150627184052) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "county"
+    t.date     "date_of_birth"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "paypal_infos", "users"
 end
