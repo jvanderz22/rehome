@@ -1,11 +1,11 @@
 require 'representer_factory'
-require 'roar_ext/merge_linked'
 
 module RepresentsJsonApiResources
   def represent(resource, options = {})
+    representer = RepresenterFactory.call(resource, options)
 
     render_options = {
-      json: resource.to_hash,
+      json: representer.to_hash,
       content_type: 'application/vnd.api+json'
     }
 

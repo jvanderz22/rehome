@@ -23,11 +23,11 @@ class RepresenterFactory
 
   private
 
-  def has_errors
+  def has_errors?
     @resource.respond_to?(:errors) && !@resource.errors.empty?
   end
 
-  def resource_class_names
+  def resource_class_name
     if collection_resource?
       @resource.klass.name
     else
@@ -35,7 +35,7 @@ class RepresenterFactory
     end
   end
 
-  def collection_resource
+  def collection_resource?
     @resource.kind_of?(ActiveRecord::Relation)
   end
 

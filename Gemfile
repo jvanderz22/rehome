@@ -26,7 +26,8 @@ gem 'rails-api'
 gem 'devise'
 
 #JSON API
-gem 'roar', '~> 1.0', require: true
+gem 'roar', '~> 1.0'
+gem 'virtus'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
