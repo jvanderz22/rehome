@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get 'applications' => 'adoption_application#index'
   root 'status#index'
+
+  namespace :api do
+    mount_devise_token_auth_for 'User', at: 'user'
+    resources :adoption_applications, :only => [:index, :show]
+  end
 end

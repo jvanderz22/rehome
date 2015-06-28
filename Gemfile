@@ -23,11 +23,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails-api'
 
-gem 'devise'
-
 #JSON API
 gem 'roar', '~> 1.0'
 gem 'virtus'
+
+#User stuff
+gem 'devise'
+gem 'devise_token_auth', '~> 0.1.32.beta10'
+gem 'omniauth'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
